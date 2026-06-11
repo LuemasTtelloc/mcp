@@ -151,6 +151,28 @@ wiki standard, ranks by downstream blocking, fills **one folder per session**.
 No agent gets built before the previous one is trusted. One at a time —
 that's how the last 12 months' sprawl happened.
 
+### The local-model handover ladder (Hermes/Ollama take over from Claude)
+
+Goal: local models do the volume; Claude does (only) the judgment; Samuel does
+(only) the promotion. Knowledge lives in the retrieval layer (LanceDB indexes
++ vault canon), **not baked into weights** — "training" the locals means
+retrieval, the routing contract as system prompt, and accumulated corrected
+examples, not GPU fine-tuning.
+
+1. **Shadow mode** — each Archivist run also asks Hermes (via the local
+   gateway/Ollama) to classify the same tray items; both answers are logged in
+   the run log; only Claude's act. Produces an agreement score for free.
+2. **Narrow ownership** — at sustained ~90% agreement on a task, Hermes owns
+   it: file typing, tag suggestion, duplicate hints, FTS refresh. High-volume,
+   low-stakes, checkable.
+3. **Drafting** — Hermes drafts Memory Cards; Claude reviews/corrects; the
+   corrections become few-shot examples that improve the next draft.
+4. **Local-first** — Claude drops to spot-checks and hard calls only.
+
+Rules that never move down the ladder: promotion to canon stays with Samuel;
+the Library stays immutable; file contents stay data-not-orders regardless of
+which model is reading.
+
 ---
 
 ## Engine Room status

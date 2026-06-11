@@ -126,9 +126,23 @@ On a later invocation, if `_meta/vault-audit.md` exists and is recent, offer to
 skip straight to Phase 2 on the next-ranked folder instead of re-auditing. Re-run
 Phase 1 if the vault has changed materially or the user asks for a fresh audit.
 
+## Routing across vaults
+
+This system spans three vaults plus a cold archive: **Samuel** (personal
+beliefs, taste, business self), **HoWA** (the product), **House of Willow
+Alexander** (parent brand, services, ecom, live group finance), and
+**Archive** (closed matters — never enriched, only indexed).
+`references/routing-contract.md` defines the four-question routing rule,
+dedup/naming hygiene, and the required frontmatter (including `route:`).
+During Phase 1, flag notes whose `route:` frontmatter doesn't match the vault
+they sit in, and notes that belong in the archive per rule 1. During Phase 2,
+misrouted notes are *reported*, not silently moved — list them for the user.
+
 ## Files in this skill
 
 - `scripts/audit_vault.py` — deterministic, stdlib-only Phase 1 scanner.
 - `references/wiki-standard.md` — the default standard; the user customizes this
   or points the skill at their own.
+- `references/routing-contract.md` — which vault any item files into (Samuel /
+  HoWA / House / Archive), plus dedup and naming hygiene rules.
 - `references/audit-ledger-template.md` — shape of `_meta/vault-audit.md`.

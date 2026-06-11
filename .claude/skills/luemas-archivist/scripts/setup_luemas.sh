@@ -106,6 +106,13 @@ done
 # ── 4. Skills install ────────────────────────────────────────────────────────
 print "\n── Step 4: install skills"
 run "create $SKILLS_DST" mkdir -p "$SKILLS_DST"
+ARCH_DOC="$SKILLS_SRC/../LUEMAS-ARCHITECTURE.md"   # .claude/LUEMAS-ARCHITECTURE.md
+if [[ -f "$ARCH_DOC" ]]; then
+  run "install architecture doc -> ~/.claude/LUEMAS-ARCHITECTURE.md" \
+      cp "$ARCH_DOC" "$HOME/.claude/LUEMAS-ARCHITECTURE.md"
+else
+  note "architecture doc not found at $ARCH_DOC (run from the repo checkout)"
+fi
 for skill in luemas-archivist vault-gap-filler; do
   if [[ -d "$SKILLS_SRC/$skill" ]]; then
     run "install skill '$skill'" cp -R "$SKILLS_SRC/$skill" "$SKILLS_DST/"

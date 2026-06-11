@@ -126,15 +126,28 @@ wiki standard, ranks by downstream blocking, fills **one folder per session**.
 - Trigger: `claude -p "audit my vault for gaps"` from a vault root.
 - Use for: cleaning up the vaults' existing drift, one folder at a time.
 
+**MEMORY INTERVIEWER** — active brain-builder. Reads the Samuel vault, finds a
+thin spot in the founder's story (named-but-empty people, uncovered periods,
+unexplained beliefs, dangling threads), asks 2-3 specific questions, and files
+the answers as candidate cards in Samuel › Personal Memory — keeping his words.
+- Trigger: `claude -p "run the memory interview"` from the Samuel vault root.
+- Skill: `.claude/skills/memory-interviewer/` (SKILL.md, `find_thin_spots.py`
+  scanner, `interview-method.md`, `autonomy.md`).
+- Status: **built this session.** The smart upgrade to the fixed-6-question
+  `morning-questions` email — questions come from *actual* vault gaps. One thin
+  spot per session; writes only to the candidate shelf, never canon. Start
+  on-demand; review a week before scheduling (06:30 launchd template in
+  `autonomy.md`). Once trusted, it supplies `morning-questions` its questions,
+  then replaces it.
+
 ### PLANNED — next build
 
-**MEMORY INTERVIEWER** — builds out Samuel's brain by asking, not waiting.
-- Daily: reads Samuel vault canon, finds a thin spot in your story (people,
-  periods, beliefs with no notes), emails you 2–3 specific personal questions.
-- Your reply is captured (email thread or a note dropped in the Out Tray) and
-  the Archivist files it into Samuel › Personal Memory as a candidate card.
-- Status: **does not exist yet.** It appeared in pre-reset briefs but was never
-  built. This is the next agent to build once the Archivist has bedded in.
+**AGENT LEARNING LOOP (local-model ladder)** — the second half of the "build
+both" decision (2026-06-11): Hermes/Ollama shadow-learn from Claude's filing and
+the Interviewer's transcripts, taking over volume as agreement proves out. Spec
+is the handover ladder below; **do not start until the Archivist and Memory
+Interviewer are trusted** (one agent at a time — that rule is why this is queued,
+not built).
 
 ### PLANNED — per the architecture (build order after Memory Interviewer)
 

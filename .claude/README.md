@@ -12,6 +12,7 @@ one file to understand "what is going on," read this one, then follow the links.
 | **LEUMAS-AGENTS.md** | The roster: every agent, what it does, live/retired status, the local-model handover ladder. The "who". |
 | **skills/leumas-archivist/** | The librarian skill: classify intake, archive evidence, promote Memory Cards. Includes the triage script, routing rules, autonomy (schedule) guide, Command Centre + Memory Card templates. |
 | **skills/vault-gap-filler/** | Retroactive vault auditor/cleaner (one folder per session). |
+| **skills/memory-interviewer/** | Active brain-builder: reads the Samuel vault, finds the thin spots in his story, asks 2-3 targeted questions, files the answers as candidate cards. The smart upgrade to the fixed daily-reflection email. |
 | **\*-BRIEF.md** | One-off work orders Claude Code on the Mac executes (e.g. fleet repair, vault-home migration). Historical once done. |
 
 ## The model in one paragraph

@@ -135,7 +135,17 @@ than it creates clarity.
 
 ## One-time migration (do these on the Mac Studio)
 
-The reset only takes effect once the physical setup matches. Do this once:
+The reset only takes effect once the physical setup matches. **The easy way:**
+clone/pull this repo on the Mac Studio and run the bundled script — dry-run
+first (prints the plan, changes nothing), then apply:
+
+```bash
+.claude/skills/luemas-archivist/scripts/setup_luemas.sh           # review the plan
+.claude/skills/luemas-archivist/scripts/setup_luemas.sh --apply   # execute
+```
+
+It performs steps 1–3 and 5 below (never deletes anything; collisions get a
+numeric suffix). Or do it by hand:
 
 1. **Rename the archive.** "HoWA Index" → `~/Luemas/Library`. It is the
    evidence store for the *whole* system, not the HoWA vault. (Keep its

@@ -7,12 +7,19 @@ destructive; nothing deleted. Report into `~/Leumas/Command Centre.md` at the en
 
 ---
 
-## PHASE 0 — Privacy gate (HARD STOP)
+## PHASE 0 — Privacy gate + the one true home (HARD STOP)
 
-Confirm the git remote of this repo is **private**:
-`git remote -v` → then the user confirms in GitHub Desktop that the repo shows
-**Private**. **If it is public, do PHASE 1 only and skip PHASE 2/3 entirely** —
-never push personal/operational config to a public repo. Report the block.
+The home repo for everything is the user's **private** repo
+**`LuemasTtelloc/Luemas-workspace`** (confirmed not publicly accessible).
+
+1. Clone it on the Mac (GitHub Desktop or `gh repo clone LuemasTtelloc/Luemas-workspace ~/Luemas-workspace`).
+   If it does not exist yet, create it **Private** and clone.
+2. Confirm in GitHub Desktop it shows **Private**. **If it is anything other
+   than private, do PHASE 1 only and skip PHASE 2/3.** Never push personal or
+   operational config to a public repo.
+3. This repo — not the monday `mcp` fork — is now "the one place." The `mcp`
+   fork was only ever a workspace to draft in; PHASE 2 copies the brain into
+   `Luemas-workspace`.
 
 ---
 
@@ -43,11 +50,18 @@ currently lives under `~/Documents` — TCC-blocked for launchd. Fix with the
 
 ---
 
-## PHASE 2 — Back up the live brain to the repo (private only)
+## PHASE 2 — Assemble the whole brain in Luemas-workspace (private only)
 
-Goal: every prompt, skill, agent script, and direction in ONE versioned place.
-Create `mac-config/` at the repo root and copy in (do not move — leave originals
-running):
+Goal: every architecture doc, prompt, skill, agent script, and direction in ONE
+versioned private place. Work inside the cloned `~/Luemas-workspace`.
+
+First, bring the brain docs over from the `mcp` fork so they live in the real
+home:
+- copy `~/luemas-setup/.claude/` (README.md, LEUMAS-ARCHITECTURE.md,
+  LEUMAS-AGENTS.md, the skills, the briefs) → `Luemas-workspace/brain/`
+  (keep the structure). These are the canonical directions.
+
+Then create `mac-config/` and copy in (do not move — leave originals running):
 
 - `~/.openclaw/workspace/scripts/`  → `mac-config/openclaw-scripts/`
 - `~/Library/LaunchAgents/com.samuel.*.plist` and `_retired/` → `mac-config/launch-agents/`

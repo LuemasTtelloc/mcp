@@ -1,13 +1,14 @@
 ---
 name: luemas-archivist
 description: >-
-  The Luemas digital librarian. Processes desktop intake folders: classifies
-  each file, archives everything as immutable evidence, and promotes only what
-  matters into the two knowledge vaults (Samuel Command, HoWA) as Memory Cards.
-  Use when the user says "process my intake", "run the archivist", "file my
-  desktop", "archive and promote", "what came in today", or drops new material
-  and wants it filed. Single responsibility: decide what something is and where
-  it belongs. The user only decides "keep it" — the archivist decides the rest.
+  The Luemas digital librarian. Empties the Out Tray (the single desktop dump
+  folder): classifies each file, files everything into the Library as immutable
+  evidence, and promotes only what matters into the two knowledge vaults
+  (Samuel Command, HoWA) as Memory Cards. Use when the user says "empty my
+  tray", "process my intake", "run the archivist", "file my desktop", "archive
+  and promote", "what came in today", or drops finished work and wants it
+  filed. Single responsibility: decide what something is and where it belongs.
+  The user only decides "I'm done with this" — the archivist decides the rest.
 ---
 
 # Luemas Archivist
@@ -21,18 +22,27 @@ it*. It is not a CEO, strategist, or assistant — it classifies and routes.
 ## The non-negotiable model
 
 ```
-INTAKE  →  ARCHIVE (always, immutable evidence)  →  MATTERS?  →  MEMORY CARD in a vault
+OUT TRAY  →  LIBRARY (always, immutable evidence)  →  MATTERS?  →  MEMORY CARD in a vault
 ```
 
-1. **Archive is universal.** Every file is preserved in the Master Archive
-   ("HoWA Index") as evidence. Nothing is deleted, nothing is skipped, the
-   archive is immutable. Archiving is not a judgement call.
-2. **Knowledge is selective.** Only files that *matter* produce a Memory Card —
+1. **One capture point.** The Out Tray (`~/Desktop/Out Tray`) is the single
+   dump folder. The user's active working folders on the Desktop (the "Desk")
+   are **never** read, moved, or indexed — finished work only enters the system
+   when the user drags it into the tray.
+2. **The Library is universal.** Every tray file is preserved in the Library
+   (the master archive, formerly named "HoWA Index") as evidence, filed by
+   date: `Library/YYYY/MM/<file>`. Nothing is deleted, nothing is skipped, the
+   Library is immutable. Filing into the Library is not a judgement call.
+3. **Knowledge is selective.** Only files that *matter* produce a Memory Card —
    distilled understanding — promoted into **exactly one** of the two vaults.
-3. **Vaults hold knowledge, never dumps.** A raw file never lands in a vault.
-   Only its Memory Card does. The card links back to the archived evidence.
-4. **Two vaults only.** Samuel Command (founder's brain) or HoWA (company's
+4. **Vaults hold knowledge, never dumps.** A raw file never lands in a vault.
+   Only its Memory Card does. The card links back to the Library evidence.
+5. **Two vaults only.** Samuel Command (founder's brain) or HoWA (company's
    brain). There is no third. House of Willow Alexander brand → HoWA › Brand.
+6. **The tray ends each run empty.** Every file either moved to the Library or
+   (on error) left in place and reported — never silently lost. "Where did it
+   go?" always has one answer: the Library, under the month it was filed, plus
+   a card in a vault if it mattered.
 
 ## The process (per file)
 
@@ -42,10 +52,11 @@ Meeting Transcript · Contract · Financial Report · Email · Screenshot · Exp
 Note · Audio · Video. Record the type; never guess silently — if unclear, mark
 `type: unknown` and continue.
 
-### Step 2 — Archive it (always)
-Place/confirm the file in the Master Archive under a dated, evidence-only path.
-Do not rename the original beyond hygiene normalization (see below). Capture its
-archive path — the Memory Card will cite it.
+### Step 2 — File it in the Library (always)
+Move the file from the Out Tray into the Library under its dated path
+(`Library/YYYY/MM/<file>`). Do not rename the original beyond hygiene
+normalization (see below). Capture its Library path — the Memory Card will
+cite it.
 
 ### Step 3 — Does this matter?
 A file *matters* if it changes understanding, decisions, or canon — product
@@ -105,10 +116,10 @@ duplicates: []                            # collapsed copies, if any
 ## Running it
 
 ### On demand (default)
-Invoke on the Mac Studio (where the intake folders and archive live):
+Invoke on the Mac Studio (where the Out Tray and Library live):
 
 ```bash
-python3 .claude/skills/luemas-archivist/scripts/triage_intake.py <intake-root> <archive-root>
+python3 .claude/skills/luemas-archivist/scripts/triage_intake.py "~/Desktop/Out Tray" ~/Luemas/Library
 ```
 
 The script produces a deterministic **triage manifest** — every intake file
@@ -121,7 +132,7 @@ collapsed, items held for review.
 ### Autonomous (the brief's intent)
 To make the archivist *autonomous* (Layer 2), schedule a headless run on the
 Mac Studio rather than building a bespoke daemon — e.g. a `launchd` job or cron
-entry that calls `claude -p "run the archivist on my intake folders"` on a
+entry that calls `claude -p "empty my Out Tray"` on a
 cadence. `references/autonomy.md` has a ready-to-edit `launchd` template. Start
 on-demand; turn on the schedule once you trust the routing.
 

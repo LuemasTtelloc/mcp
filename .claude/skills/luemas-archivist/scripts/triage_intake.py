@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """Deterministic triage for the Luemas Archivist.
 
-Read-only. Scans the desktop intake folder(s), classifies each file by type,
+Read-only. Scans the Out Tray (the single desktop dump folder), classifies each file by type,
 clusters duplicates, proposes a route, and reports which files are already in
-the Master Archive (so re-runs are idempotent). It does NOT move, archive, or
+the Library (the master archive, so re-runs are idempotent). It does NOT move, file, or
 write anything — it produces the worklist the archivist then acts on.
 
 Usage:
-    python3 triage_intake.py <intake-root> [<archive-root>] [--json]
+    python3 triage_intake.py <out-tray> [<library-root>] [--json]
 
 The LLM step (what is it / does it matter / write the Memory Card) happens after
 this, using the manifest as its worklist. This script only does the parts that
@@ -192,7 +192,7 @@ def main(argv: list[str]) -> int:
     args = [a for a in argv[1:] if not a.startswith("--")]
     as_json = "--json" in argv
     if not args:
-        print("usage: triage_intake.py <intake-root> [<archive-root>] [--json]",
+        print("usage: triage_intake.py <out-tray> [<library-root>] [--json]",
               file=sys.stderr)
         return 2
     intake_root = os.path.abspath(args[0])

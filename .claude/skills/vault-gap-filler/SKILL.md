@@ -131,7 +131,7 @@ Phase 1 if the vault has changed materially or the user asks for a fresh audit.
 Per the June 2026 architecture reset (`.claude/LUEMAS-ARCHITECTURE.md`), there
 are **two knowledge vaults** — **Samuel Command** (founder's brain) and **HoWA**
 (company's brain, including the House of Willow Alexander brand under HoWA ›
-Brand) — plus a **universal evidence archive** ("HoWA Index") that is separate
+Brand) — plus a **universal evidence archive** (the Library, formerly "HoWA Index") that is separate
 from the vaults. Vaults hold distilled knowledge only.
 `references/routing-contract.md` points at the canonical routing rules. During
 Phase 1, flag notes whose `route:` is the legacy `house` value or otherwise
@@ -144,6 +144,6 @@ vault that belongs in the archive. During Phase 2, misrouted notes are
 - `scripts/audit_vault.py` — deterministic, stdlib-only Phase 1 scanner.
 - `references/wiki-standard.md` — the default standard; the user customizes this
   or points the skill at their own.
-- `references/routing-contract.md` — which vault any item files into (Samuel /
-  HoWA / House / Archive), plus dedup and naming hygiene rules.
+- `references/routing-contract.md` — pointer to the canonical two-vault routing
+  rules (Samuel Command / HoWA, plus the Library as universal evidence).
 - `references/audit-ledger-template.md` — shape of `_meta/vault-audit.md`.

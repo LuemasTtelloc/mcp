@@ -30,30 +30,47 @@ never manually maintains knowledge.
 ## The six layers
 
 ```
-L1 CAPTURE      Desktop intake folders (dump zone, zero filing decisions)
+L1 CAPTURE      Your Desk (untouched) + ONE Out Tray (the only dump folder)
 L2 ARCHIVIST    The librarian agent — classify, decide, route   ← PRIORITY 1
-L3 ARCHIVE      "HoWA Index" — immutable evidence, everything enters, nothing lost
+L3 LIBRARY      Master archive (formerly "HoWA Index") — immutable evidence, everything enters, nothing lost
 L4 KNOWLEDGE    Two vaults only: Samuel Command + HoWA (distilled understanding)
 L5 GRAPH        Relationships across people/companies/projects (future)
 L6 SURFACES     CEO Command Centre (outcomes) + AI Engine Room (agents)
 ```
 
-### L1 — Capture
-Desktop is the universal capture surface. Existing intake folders stay:
-Personal Intake, AI Command Intake, HoWA Intake, Voice Notes, Screenshots.
-Workflow: drag, drop, continue. No decisions.
+### L1 — Capture: the Desk and the Out Tray
+
+How Samuel actually works: an active folder on the Desktop holds the files for
+whatever he's working on now; when the work is finished, the files should "go
+away" — correctly, without filing decisions.
+
+- **The Desk** — any working folder on the Desktop. **The system never touches
+  it.** No agent reads, moves, or indexes active work.
+- **The Out Tray** — `~/Desktop/Out Tray`, the **single** dump folder and the
+  only capture surface. Finished with something? Drag it (or the whole folder)
+  into the tray and continue working. That drag is the only filing decision
+  that exists: "I'm done with this, keep it."
+
+The earlier five intake folders (Personal Intake, AI Command Intake, HoWA
+Intake, Voice Notes, Screenshots) are retired as separate destinations — they
+become ordinary contents of the Out Tray (existing ones get dragged in once
+and processed). One tray, zero decisions.
 
 ### L2 — Archivist Agent (the missing keystone)
 A dedicated, single-responsibility digital librarian. **Not** a CEO, strategist,
-or assistant. It monitors intake, analyses each file, and runs the process
-below. See `.claude/skills/luemas-archivist/SKILL.md` for the implementation.
+or assistant. On each run it empties the Out Tray: every file into the Library,
+Memory Cards for what matters. See
+`.claude/skills/luemas-archivist/SKILL.md` for the implementation.
 
-### L3 — Master Archive ("HoWA Index")
-Permanent **evidence** layer. Everything enters; nothing is deleted; it is
-immutable. Holds raw source material only: PDFs, images, emails, exports,
-screenshots, contracts, audio, video, notes.
-**Archive ≠ knowledge. Archive = evidence.** (Note: the folder is named "HoWA
-Index" but is the archive for the *whole* system, not the HoWA vault.)
+### L3 — The Library (master archive; formerly "HoWA Index")
+Permanent **evidence** layer for the *whole* system — renamed from "HoWA
+Index" because that name wrongly implied it belonged to the HoWA vault.
+Everything enters; nothing is deleted; it is immutable. Filed by date:
+`~/Luemas/Library/YYYY/MM/<file>`, so "where did it go?" always has the same
+answer — *the Library, under the month you finished it.* Holds raw source
+material only: PDFs, images, emails, exports, screenshots, contracts, audio,
+video, notes.
+**Library ≠ knowledge. Library = evidence.**
 
 ### L4 — Knowledge System (exactly two vaults)
 Knowledge is distilled understanding, separated from evidence. **Vaults contain
@@ -113,3 +130,29 @@ Dashboard agents.)
 
 Until the Archivist exists, every other system accumulates complexity faster
 than it creates clarity.
+
+---
+
+## One-time migration (do these on the Mac Studio)
+
+The reset only takes effect once the physical setup matches. Do this once:
+
+1. **Rename the archive.** "HoWA Index" → `~/Luemas/Library`. It is the
+   evidence store for the *whole* system, not the HoWA vault. (Keep its
+   contents; just rename/move the root and re-point any scripts.)
+2. **Create the Out Tray.** `~/Desktop/Out Tray` — the single dump folder.
+3. **Retire the five intake folders.** Drag the current contents of Personal
+   Intake, AI Command Intake, HoWA Intake, Voice Notes, and Screenshots into
+   the Out Tray once, then delete the empty folders. From now on there is one
+   tray.
+4. **Confirm the two vaults exist** with the folder maps in
+   `luemas-archivist/references/routing-rules.md`: `Samuel Command` and `HoWA`
+   (with House of Willow Alexander brand under `HoWA/Brand`).
+5. **Deploy the skills.** Copy `.claude/skills/luemas-archivist` and
+   `.claude/skills/vault-gap-filler` into `~/.claude/skills/`.
+6. **First run, on-demand.** `claude -p "empty my Out Tray"` against a small
+   batch. Check the routing, correct any mis-routes, then enable the schedule
+   in `luemas-archivist/references/autonomy.md`.
+
+After this, the daily loop is: work on the Desk → drag finished files to the
+Out Tray → the Archivist files them into the Library and promotes what matters.

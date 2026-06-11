@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deterministic triage for the Luemas Archivist.
+"""Deterministic triage for the Leumas Archivist.
 
 Read-only. Scans the Out Tray (the single desktop dump folder), classifies each file by type,
 clusters duplicates, proposes a route, and reports which files are already in

@@ -16,7 +16,7 @@ The single source of truth is:
 - **Two vaults only:** **Samuel Command** (founder's brain) and **HoWA** (the
   company's brain). House of Willow Alexander brand is **not** a separate vault
   — it lives in **HoWA › Brand**.
-- **Archive is universal evidence** ("HoWA Index"), separate from the vaults.
+- **Archive is universal evidence** (the Library, formerly "HoWA Index"), separate from the vaults.
   Vaults hold distilled knowledge only — never raw dumps or archive material.
 - During audit, flag any note whose `route:` frontmatter is `house` (legacy) or
   doesn't match the two-vault model, and any raw/evidence material sitting in a

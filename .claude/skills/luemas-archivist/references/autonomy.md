@@ -21,7 +21,7 @@ then `launchctl load ~/Library/LaunchAgents/com.luemas.archivist.plist`.
     <string>/bin/zsh</string>
     <string>-lc</string>
     <!-- runs headless; -p is print/non-interactive mode -->
-    <string>cd /Users/luemasttelloc/Luemas && claude -p "run the luemas-archivist on my intake folders" >> ~/Library/Logs/luemas-archivist.log 2>&1</string>
+    <string>cd /Users/luemasttelloc/Luemas && claude -p "empty my Out Tray" >> ~/Library/Logs/luemas-archivist.log 2>&1</string>
   </array>
   <key>StartCalendarInterval</key>
   <array>
@@ -39,7 +39,7 @@ Runs the archivist at 08:00 and 18:00 daily. Adjust the times/cadence freely.
 ## Option B — cron
 
 ```cron
-0 8,18 * * *  cd /Users/luemasttelloc/Luemas && /usr/local/bin/claude -p "run the luemas-archivist on my intake folders" >> ~/Library/Logs/luemas-archivist.log 2>&1
+0 8,18 * * *  cd /Users/luemasttelloc/Luemas && /usr/local/bin/claude -p "empty my Out Tray" >> ~/Library/Logs/luemas-archivist.log 2>&1
 ```
 
 ## Engine Room reporting

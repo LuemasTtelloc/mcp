@@ -64,7 +64,49 @@ Key consequences:
 
 ## Agent roster
 
-### LIVE
+### DISCOVERED LIVE FLEET (verified on the Mac Studio, 2026-06-11)
+
+> Earlier drafts of this doc wrongly claimed these were "never built." A
+> launchd/process inventory proved otherwise. This is the real fleet:
+
+**Scheduled agents** (`launchctl`, `~/Library/LaunchAgents/com.samuel.*`):
+
+| Agent | What it does | Status 2026-06-11 |
+|---|---|---|
+| `morning-questions` | Sends the 06:30 "Daily reflection" email (6 personal questions) — the live Memory Interviewer | ✅ running daily |
+| `morning-questions-capture` / `spiritual-answer-ingest` | Capture + ingest Samuel's emailed answers | ✅ loaded |
+| `howa-source-walker` | The trawler — walks sources, scrapes context | loaded |
+| `vault-keeper-triage` | Pre-existing librarian-style triage | loaded — overlaps the Archivist; reconcile |
+| `vault-index-rebuild` / `howa-context-index-rebuild` | Rebuild the LANCE search indexes | ⚠️ `howa-context-index-rebuild` exiting 1 (check paths after archive rename) |
+| `ceo-desktop-brief` | CEO desktop briefing | ⚠️ exiting 1 (broken before the reset) |
+| `command-dashboard` | Engine Room dashboard: `~/.openclaw/workspace/dashboard/app.py` → **http://localhost:8080/ai** | ✅ running |
+| `apple-notes-ingest`, `personal-markdown-intake`, `intake-ai-command-writer` (+ dry-runs) | Intake pipeline (pre-reset paths) | loaded — repoint at the Out Tray model |
+| `weekly-synthesis`, `brain-health-check` | Periodic synthesis / health | loaded |
+| `hermes-gateway-keepalive`, `hermes-local-outbox-check` | Keep the Hermes gateway up | ✅ gateway running |
+| `com.openclaw.agent-supervisor.rollcall`, `codex-openclaw-bridge-poller` | OpenClaw supervision + Codex bridge | loaded |
+
+**Platforms running:** OpenClaw (ClawX + supervisor + dashboard = the AI Engine
+Room), Hermes gateway (`hermes_cli gateway`), Ollama (model loaded, 131k ctx),
+LM Studio, claude-mem + Chroma (Claude Desktop memory), two vault MCP servers
+(`mcpvault` + `mcp_vault_query_server.py` — the latter runs from
+`~/Codex markdown for memory/`, which MUST stay in the home folder).
+
+**Cron:** the `samuel-spiritual-guru` jobs are frozen (`PHASE0-FREEZE
+2026-05-21`) — dormant, not dead.
+
+**Known locations:** Samuel Command Vault = `~/Documents/Samuel Command Vault`
+(`_AI_Accessible` subfolder exposed to Claude Desktop). `~/Leumas` was already a
+structured brain root (`01_Inbox` … `03_Canon` … `07_Dashboard_DB`); the
+Library sits alongside those. The CEO Command Centre also exists as monday.com
+workspace **"Z. 02 — CEO Command Centre"**.
+
+**Open reconciliation tasks:** fix the two failing jobs; check every plist for
+renamed paths (a `~/Luemas → ~/Leumas` symlink shim is in place); decide
+Archivist vs `vault-keeper-triage` ownership; map which agents feed the LANCE
+indexes; merge the Command Centre file, the OpenClaw dashboard, and the monday
+workspace into ONE surface rather than three.
+
+### LIVE (built this session)
 
 **ARCHIVIST** — the librarian. *Single responsibility: what is this, where does
 it belong.*

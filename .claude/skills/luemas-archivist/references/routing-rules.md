@@ -4,6 +4,23 @@ Canonical model from `.claude/LUEMAS-ARCHITECTURE.md`. Everything is archived as
 evidence; only what *matters* gets a Memory Card promoted into **one of two
 vaults**.
 
+## Where agent-written cards land: the candidate shelf (review gate)
+
+The archivist NEVER writes directly into a vault's canon. Every card it creates
+lands on that vault's **candidate shelf** — a review zone the user promotes
+from. In the live vaults this is a numbered folder, e.g. Samuel Command's
+`04 Memory Candidates/` (and a `10 Candidate Shelves/` equivalent). Write cards
+to a dated batch subfolder so each run is reviewable and reversible:
+
+```
+<Vault>/04 Memory Candidates/_Archivist <YYYY-MM-DD>/<card>.md
+```
+
+The human promotes a card into canon (the appropriate numbered topic folder)
+when they accept it; until then it is a proposal, not knowledge. Mirror the
+vault's existing numbered-folder convention rather than inventing flat folder
+names — discover the real structure by listing the vault before writing.
+
 ## The four questions (in order, first yes wins)
 
 1. **Is it dead / does it not matter?** → **Archive only.** No Memory Card.

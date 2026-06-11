@@ -128,15 +128,16 @@ Phase 1 if the vault has changed materially or the user asks for a fresh audit.
 
 ## Routing across vaults
 
-This system spans three vaults plus a cold archive: **Samuel** (personal
-beliefs, taste, business self), **HoWA** (the product), **House of Willow
-Alexander** (parent brand, services, ecom, live group finance), and
-**Archive** (closed matters — never enriched, only indexed).
-`references/routing-contract.md` defines the four-question routing rule,
-dedup/naming hygiene, and the required frontmatter (including `route:`).
-During Phase 1, flag notes whose `route:` frontmatter doesn't match the vault
-they sit in, and notes that belong in the archive per rule 1. During Phase 2,
-misrouted notes are *reported*, not silently moved — list them for the user.
+Per the June 2026 architecture reset (`.claude/LUEMAS-ARCHITECTURE.md`), there
+are **two knowledge vaults** — **Samuel Command** (founder's brain) and **HoWA**
+(company's brain, including the House of Willow Alexander brand under HoWA ›
+Brand) — plus a **universal evidence archive** ("HoWA Index") that is separate
+from the vaults. Vaults hold distilled knowledge only.
+`references/routing-contract.md` points at the canonical routing rules. During
+Phase 1, flag notes whose `route:` is the legacy `house` value or otherwise
+mismatches the two-vault model, and flag raw/evidence material sitting in a
+vault that belongs in the archive. During Phase 2, misrouted notes are
+*reported*, not silently moved — list them for the user.
 
 ## Files in this skill
 

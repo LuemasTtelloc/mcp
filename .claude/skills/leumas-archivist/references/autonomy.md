@@ -6,8 +6,8 @@ trust the routing for a week, then turn on the schedule.
 
 ## Option A — `launchd` (recommended on macOS)
 
-Save as `~/Library/LaunchAgents/com.luemas.archivist.plist`, edit the paths,
-then `launchctl load ~/Library/LaunchAgents/com.luemas.archivist.plist`.
+Save as `~/Library/LaunchAgents/com.leumas.archivist.plist`, edit the paths,
+then `launchctl load ~/Library/LaunchAgents/com.leumas.archivist.plist`.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -15,21 +15,21 @@ then `launchctl load ~/Library/LaunchAgents/com.luemas.archivist.plist`.
   "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-  <key>Label</key>              <string>com.luemas.archivist</string>
+  <key>Label</key>              <string>com.leumas.archivist</string>
   <key>ProgramArguments</key>
   <array>
     <string>/bin/zsh</string>
     <string>-lc</string>
     <!-- runs headless; -p is print/non-interactive mode -->
-    <string>cd /Users/luemasttelloc/Luemas && claude -p "empty my Out Tray" >> ~/Library/Logs/luemas-archivist.log 2>&1</string>
+    <string>cd /Users/luemasttelloc/Leumas && claude -p "empty my Out Tray" >> ~/Library/Logs/leumas-archivist.log 2>&1</string>
   </array>
   <key>StartCalendarInterval</key>
   <array>
     <dict><key>Hour</key><integer>8</integer><key>Minute</key><integer>0</integer></dict>
     <dict><key>Hour</key><integer>18</integer><key>Minute</key><integer>0</integer></dict>
   </array>
-  <key>StandardErrorPath</key>   <string>/Users/luemasttelloc/Library/Logs/luemas-archivist.err</string>
-  <key>StandardOutPath</key>     <string>/Users/luemasttelloc/Library/Logs/luemas-archivist.log</string>
+  <key>StandardErrorPath</key>   <string>/Users/luemasttelloc/Library/Logs/leumas-archivist.err</string>
+  <key>StandardOutPath</key>     <string>/Users/luemasttelloc/Library/Logs/leumas-archivist.log</string>
 </dict>
 </plist>
 ```
@@ -39,7 +39,7 @@ Runs the archivist at 08:00 and 18:00 daily. Adjust the times/cadence freely.
 ## Option B — cron
 
 ```cron
-0 8,18 * * *  cd /Users/luemasttelloc/Luemas && /usr/local/bin/claude -p "empty my Out Tray" >> ~/Library/Logs/luemas-archivist.log 2>&1
+0 8,18 * * *  cd /Users/luemasttelloc/Leumas && /usr/local/bin/claude -p "empty my Out Tray" >> ~/Library/Logs/leumas-archivist.log 2>&1
 ```
 
 ## Engine Room reporting

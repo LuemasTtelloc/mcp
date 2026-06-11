@@ -68,3 +68,47 @@ recommendation: the Archivist owns intake, the walker is retired).
 Write a summary of every edit/retirement into `~/Leumas/Command Centre.md`
 under AGENT ACTIVITY + RUN LOG, and tell the user: which jobs are green
 (`launchctl list | grep samuel` statuses), which are retired, what's pending.
+
+---
+
+# PHASE 2 — Switch on the Archivist schedule
+
+Only after Phase 1 is green:
+
+1. **Permissions.** Merge the scoped allow-rules from
+   `.claude/skills/leumas-archivist/references/autonomy.md` (Step 1) into
+   `~/.claude/settings.json` — preserve any existing settings; add, don't
+   replace. Vault path for the rules: `~/Documents/Samuel Command Vault`
+   (plus the HoWA vault path once confirmed).
+2. **Schedule.** Install the launchd plist from `autonomy.md` as
+   `~/Library/LaunchAgents/com.leumas.archivist.plist` (08:00 + 18:00),
+   `launchctl load` it, then `launchctl kickstart` once and verify a clean run
+   in `~/Library/Logs/leumas-archivist.log`.
+3. Add an `Archivist (scheduled)` row to the Command Centre AGENT ACTIVITY
+   table.
+
+# PHASE 3 — One morning surface (default decision)
+
+Working default — confirmed overridable by Samuel: **the OpenClaw dashboard
+(`http://localhost:8080/ai`) is THE morning view.** The Command Centre file is
+its data source, not a competitor.
+
+1. Read `~/.openclaw/workspace/dashboard/app.py`. If it's a simple
+   Flask/FastAPI app, add (with user approval) a panel or route that renders
+   `~/Leumas/Command Centre.md` and the latest
+   `~/Leumas/07_Dashboard_DB/CEO Command Centre — What Matters Today.md`.
+   Keep the change minimal — render the markdown, nothing fancier.
+2. If app.py is complex or fragile, do NOT modify it — instead leave a note in
+   the Command Centre and report back; the wiring becomes a follow-up task.
+3. The monday.com "Z. 02 — CEO Command Centre" workspace stays as-is for now
+   (business ops live there); no changes to monday in this session.
+
+# Done means
+
+- `launchctl list | grep -E "samuel|leumas"` shows no status-1 rows except
+  deliberately retired ones.
+- The Archivist runs at 08:00/18:00 unattended.
+- One browser tab (localhost:8080/ai) shows: what changed, what needs Samuel,
+  agent activity.
+- Command Centre.md reflects all of it, and every change made in this session
+  is listed there.

@@ -1,11 +1,11 @@
-# LUEMAS ARCHITECTURE — Source of Truth
+# LEUMAS ARCHITECTURE — Source of Truth
 
 **Status:** canonical · **Established:** June 2026 · **Supersedes:** all prior
 assumptions, including "every vault is a destination" and any four-vault model.
 
 > The system does not need more storage. The system needs a librarian.
 
-This document is the single architectural reference for Luemas, OpenClaw, the
+This document is the single architectural reference for Leumas, OpenClaw, the
 CEO Command Centre, the AI Engine Room, and the move onto the iMac. When any
 skill, agent, or doc in this repo conflicts with this file, **this file wins.**
 
@@ -60,13 +60,13 @@ and processed). One tray, zero decisions.
 A dedicated, single-responsibility digital librarian. **Not** a CEO, strategist,
 or assistant. On each run it empties the Out Tray: every file into the Library,
 Memory Cards for what matters. See
-`.claude/skills/luemas-archivist/SKILL.md` for the implementation.
+`.claude/skills/leumas-archivist/SKILL.md` for the implementation.
 
 ### L3 — The Library (master archive; formerly "HoWA Index")
 Permanent **evidence** layer for the *whole* system — renamed from "HoWA
 Index" because that name wrongly implied it belonged to the HoWA vault.
 Everything enters; nothing is deleted; it is immutable. Filed by date:
-`~/Luemas/Library/YYYY/MM/<file>`, so "where did it go?" always has the same
+`~/Leumas/Library/YYYY/MM/<file>`, so "where did it go?" always has the same
 answer — *the Library, under the month you finished it.* Holds raw source
 material only: PDFs, images, emails, exports, screenshots, contracts, audio,
 video, notes.
@@ -78,7 +78,7 @@ knowledge only — never raw dumps, never inboxes, never archives.**
 
 **SAMUEL COMMAND VAULT — the founder's brain.** People (Family, Alex, Lyn,
 David Williams), Finance (Personal Finance, Creditors, Legal Matters), Health,
-Spiritual, AI Systems, CEO Command, Luemas, Personal Memory, Strategic Thinking.
+Spiritual, AI Systems, CEO Command, Leumas, Personal Memory, Strategic Thinking.
 
 **HOWA VAULT — the company's brain.** HoWA Product (Assistant, Housekeeper,
 Steward), Brand (Almanac, Pattern, Creative System), Operations (ServiceOS,
@@ -140,14 +140,14 @@ clone/pull this repo on the Mac Studio and run the bundled script — dry-run
 first (prints the plan, changes nothing), then apply:
 
 ```bash
-.claude/skills/luemas-archivist/scripts/setup_luemas.sh           # review the plan
-.claude/skills/luemas-archivist/scripts/setup_luemas.sh --apply   # execute
+.claude/skills/leumas-archivist/scripts/setup_leumas.sh           # review the plan
+.claude/skills/leumas-archivist/scripts/setup_leumas.sh --apply   # execute
 ```
 
 It performs steps 1–3 and 5 below (never deletes anything; collisions get a
 numeric suffix). Or do it by hand:
 
-1. **Rename the archive.** "HoWA Index" → `~/Luemas/Library`. It is the
+1. **Rename the archive.** "HoWA Index" → `~/Leumas/Library`. It is the
    evidence store for the *whole* system, not the HoWA vault. (Keep its
    contents; just rename/move the root and re-point any scripts.)
 2. **Create the Out Tray.** `~/Desktop/Out Tray` — the single dump folder.
@@ -156,13 +156,13 @@ numeric suffix). Or do it by hand:
    the Out Tray once, then delete the empty folders. From now on there is one
    tray.
 4. **Confirm the two vaults exist** with the folder maps in
-   `luemas-archivist/references/routing-rules.md`: `Samuel Command` and `HoWA`
+   `leumas-archivist/references/routing-rules.md`: `Samuel Command` and `HoWA`
    (with House of Willow Alexander brand under `HoWA/Brand`).
-5. **Deploy the skills.** Copy `.claude/skills/luemas-archivist` and
+5. **Deploy the skills.** Copy `.claude/skills/leumas-archivist` and
    `.claude/skills/vault-gap-filler` into `~/.claude/skills/`.
 6. **First run, on-demand.** `claude -p "empty my Out Tray"` against a small
    batch. Check the routing, correct any mis-routes, then enable the schedule
-   in `luemas-archivist/references/autonomy.md`.
+   in `leumas-archivist/references/autonomy.md`.
 
 After this, the daily loop is: work on the Desk → drag finished files to the
 Out Tray → the Archivist files them into the Library and promotes what matters.

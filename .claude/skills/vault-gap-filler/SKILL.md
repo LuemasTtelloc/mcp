@@ -128,7 +128,7 @@ Phase 1 if the vault has changed materially or the user asks for a fresh audit.
 
 ## Routing across vaults
 
-Per the June 2026 architecture reset (`.claude/LUEMAS-ARCHITECTURE.md`), there
+Per the June 2026 architecture reset (`.claude/LEUMAS-ARCHITECTURE.md`), there
 are **two knowledge vaults** — **Samuel Command** (founder's brain) and **HoWA**
 (company's brain, including the House of Willow Alexander brand under HoWA ›
 Brand) — plus a **universal evidence archive** (the Library, formerly "HoWA Index") that is separate

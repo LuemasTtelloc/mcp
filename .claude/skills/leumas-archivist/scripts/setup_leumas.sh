@@ -1,17 +1,17 @@
 #!/bin/zsh
-# Luemas one-time migration — sets up the Desk / Out Tray / Library model.
-# See .claude/LUEMAS-ARCHITECTURE.md ("One-time migration").
+# Leumas one-time migration — sets up the Desk / Out Tray / Library model.
+# See .claude/LEUMAS-ARCHITECTURE.md ("One-time migration").
 #
 # SAFE BY DEFAULT: running with no arguments is a DRY RUN that only prints what
 # it would do. Run with --apply to actually make changes. Never deletes a file;
 # only creates folders and moves files (collisions get a numeric suffix).
 #
 # Usage (on the Mac Studio):
-#   ./setup_luemas.sh             # dry run — review the plan
-#   ./setup_luemas.sh --apply     # do it
+#   ./setup_leumas.sh             # dry run — review the plan
+#   ./setup_leumas.sh --apply     # do it
 #
 # Optional environment overrides:
-#   LUEMAS_HOME      default: $HOME/Luemas
+#   LEUMAS_HOME      default: $HOME/Leumas
 #   OLD_ARCHIVE      default: auto-detect "HoWA Index"/"HoWA Index Intake" on Desktop/Documents
 #   OUT_TRAY         default: $HOME/Desktop/Out Tray
 
@@ -20,8 +20,8 @@ set -euo pipefail
 APPLY=false
 [[ "${1:-}" == "--apply" ]] && APPLY=true
 
-LUEMAS_HOME="${LUEMAS_HOME:-$HOME/Luemas}"
-LIBRARY="$LUEMAS_HOME/Library"
+LEUMAS_HOME="${LEUMAS_HOME:-$HOME/Leumas}"
+LIBRARY="$LEUMAS_HOME/Library"
 OUT_TRAY="${OUT_TRAY:-$HOME/Desktop/Out Tray}"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 SKILLS_SRC="$(cd "$SCRIPT_DIR/../.." && pwd)"   # .claude/skills
@@ -49,11 +49,26 @@ move_into() {
   run "move '$src' -> '$target'" mv -n "$src" "$target"
 }
 
-print "Luemas migration — $($APPLY && echo 'APPLYING' || echo 'DRY RUN (pass --apply to execute)')"
-print "  LUEMAS_HOME: $LUEMAS_HOME"
+print "Leumas migration — $($APPLY && echo 'APPLYING' || echo 'DRY RUN (pass --apply to execute)')"
+print "  LEUMAS_HOME: $LEUMAS_HOME"
 print "  Library:     $LIBRARY"
 print "  Out Tray:    $OUT_TRAY"
 print ""
+
+# ── 0. Spelling fix: Luemas -> Leumas (Samuel backwards) ─────────────────────
+print "── Step 0: spelling migration (Luemas -> Leumas)"
+if [[ -d "$HOME/Luemas" && ! -d "$LEUMAS_HOME" ]]; then
+  run "rename ~/Luemas -> $LEUMAS_HOME" mv -n "$HOME/Luemas" "$LEUMAS_HOME"
+elif [[ -d "$HOME/Luemas" && -d "$LEUMAS_HOME" ]]; then
+  note "BOTH ~/Luemas and ~/Leumas exist — merge manually, not auto-merging"
+else
+  note "no ~/Luemas folder to rename"
+fi
+for legacy in "$HOME/.claude/skills/luemas-archivist"; do
+  if [[ -d "$legacy" ]]; then
+    run "remove misspelled skill '$legacy' (replaced by leumas-archivist)" rm -rf "$legacy"
+  fi
+done
 
 # ── 1. The Library (rename the old "HoWA Index" archive) ────────────────────
 print "── Step 1: Library"
@@ -67,7 +82,7 @@ else
       [[ -d "$cand" ]] && OLD_ARCHIVE="$cand" && break
     done
   fi
-  run "create $LUEMAS_HOME" mkdir -p "$LUEMAS_HOME"
+  run "create $LEUMAS_HOME" mkdir -p "$LEUMAS_HOME"
   if [[ -n "$OLD_ARCHIVE" && -d "$OLD_ARCHIVE" ]]; then
     note "found old archive: $OLD_ARCHIVE"
     run "rename old archive -> $LIBRARY" mv -n "$OLD_ARCHIVE" "$LIBRARY"
@@ -106,14 +121,14 @@ done
 # ── 4. Skills install ────────────────────────────────────────────────────────
 print "\n── Step 4: install skills"
 run "create $SKILLS_DST" mkdir -p "$SKILLS_DST"
-ARCH_DOC="$SKILLS_SRC/../LUEMAS-ARCHITECTURE.md"   # .claude/LUEMAS-ARCHITECTURE.md
+ARCH_DOC="$SKILLS_SRC/../LEUMAS-ARCHITECTURE.md"   # .claude/LEUMAS-ARCHITECTURE.md
 if [[ -f "$ARCH_DOC" ]]; then
-  run "install architecture doc -> ~/.claude/LUEMAS-ARCHITECTURE.md" \
-      cp "$ARCH_DOC" "$HOME/.claude/LUEMAS-ARCHITECTURE.md"
+  run "install architecture doc -> ~/.claude/LEUMAS-ARCHITECTURE.md" \
+      cp "$ARCH_DOC" "$HOME/.claude/LEUMAS-ARCHITECTURE.md"
 else
   note "architecture doc not found at $ARCH_DOC (run from the repo checkout)"
 fi
-for skill in luemas-archivist vault-gap-filler; do
+for skill in leumas-archivist vault-gap-filler; do
   if [[ -d "$SKILLS_SRC/$skill" ]]; then
     run "install skill '$skill'" cp -R "$SKILLS_SRC/$skill" "$SKILLS_DST/"
   else
@@ -131,4 +146,4 @@ fi
 print "  1. Drag any finished work into '$OUT_TRAY'"
 print "  2. Run:  claude -p \"empty my Out Tray\""
 print "  3. Check the routing; when happy, enable the schedule:"
-print "     see ~/.claude/skills/luemas-archivist/references/autonomy.md"
+print "     see ~/.claude/skills/leumas-archivist/references/autonomy.md"

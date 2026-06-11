@@ -1,6 +1,6 @@
 # Routing Rules — Two Vaults + Universal Archive
 
-Canonical model from `.claude/LUEMAS-ARCHITECTURE.md`. Everything is archived as
+Canonical model from `.claude/LEUMAS-ARCHITECTURE.md`. Everything is archived as
 evidence; only what *matters* gets a Memory Card promoted into **one of two
 vaults**.
 
@@ -29,7 +29,7 @@ names — discover the real structure by listing the vault before writing.
    as evidence — just no knowledge promoted.
 2. **Is it about ME?** → **Samuel Command vault.** Beliefs, taste, reflections,
    judgement, people/relationships, health, spiritual, personal finance/legal
-   position, strategic thinking, AI systems, CEO command, Luemas, personal
+   position, strategic thinking, AI systems, CEO command, Leumas, personal
    memory.
 3. **Is it about the PRODUCT?** → **HoWA vault.** Product canon (Assistant /
    Housekeeper / Steward), IVP, technical briefs, db schema, sitemaps,
@@ -51,7 +51,7 @@ Health/
 Spiritual/
 AI Systems/
 CEO Command/
-Luemas/
+Leumas/
 Personal Memory/
 Strategic Thinking/
 _inbox/            (unrouted — needs human decision)

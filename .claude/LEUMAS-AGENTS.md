@@ -1,7 +1,7 @@
-# LUEMAS AGENT ARCHITECTURE — Master Roster
+# LEUMAS AGENT ARCHITECTURE — Master Roster
 
 **Status:** canonical · **Created:** 2026-06-11 · companion to
-`LUEMAS-ARCHITECTURE.md` (the layers) — this doc answers **who does what to
+`LEUMAS-ARCHITECTURE.md` (the layers) — this doc answers **who does what to
 your files, who runs them, and what is actually live versus planned.**
 This is the Engine Room's source of truth. When an agent is added, changed, or
 retired, update this file.
@@ -14,7 +14,8 @@ retired, update this file.
 |---|---|---|
 | **Claude Code on the Mac Studio** (`claude` command, your Claude account) | The judgment engine | Runs the Archivist and gap-filler skills. All classification, summarizing, card-writing decisions. |
 | **Local Python scripts** (no AI) | Deterministic helpers | Triage (file typing, dedup clustering, Library-presence checks). Run by the skills. |
-| **Local Llama models** | Installed but **NOT wired in** | Nothing in this pipeline yet. Candidate future role: cheap bulk pre-classification. Until then they are idle in this workflow. |
+| **Hermes (local Llama)** | Installed but **NOT wired in** | Nothing in this pipeline yet. Planned role: high-volume/low-stakes work — bulk pre-classification of backlogs, OCR/extraction, tagging, embedding/indexing the Library for search. Not the judgment layer: misfiling memory is expensive, so routing/card decisions stay with Claude until a local model proves itself on a reviewed batch. |
+| **OpenClaw** | From the pre-reset plans; **NOT wired in** | Planned role: the orchestration layer — the Engine Room runner that schedules agents, tracks status, and glues local models and Claude together. Not built into this pipeline yet. |
 | **Claude Code on the web** (cloud session) | The workshop | Builds and maintains these skills/docs in the `mcp` repo. Never touches Mac files directly. |
 
 > Plain truth: today, "the system" = Claude on the Mac Studio + small scripts.
@@ -31,7 +32,7 @@ YOUR DESK                ~/Desktop/<working folders>          system never touch
 OUT TRAY                 ~/Desktop/Out Tray                   the ONE capture point
    │  Archivist run (manual today; scheduled later)
    ▼
-THE LIBRARY              ~/Luemas/Library/YYYY/MM/…           ALL evidence, immutable,
+THE LIBRARY              ~/Leumas/Library/YYYY/MM/…           ALL evidence, immutable,
    │                                                          filed by month. (This is
    │                                                          the renamed "HoWA Index".)
    │  only what matters → Memory Card
@@ -47,7 +48,13 @@ VAULT CANON              Samuel Command vault · HoWA vault    your two brains �
 Key consequences:
 
 - **The Library is supposed to be full.** It is a warehouse, not a mess. You
-  never browse it for memory; cards link back into it.
+  never browse it for memory; cards link back into it. The Library lives at
+  `~/Leumas/Library` (home folder), NOT on the Desktop — the Desktop holds only
+  the Out Tray and active work.
+- **Library layout:** dated folders (`2026/06/…`) for everything the Archivist
+  files, plus `_Legacy pre-reset archive/` holding the old "HoWA Index"
+  contents that came across in the rename. Legacy material is already filed *as
+  evidence*; knowledge extraction from it is backlog, done in reviewed batches.
 - **Memory is pulled from vault canon only.** An un-promoted candidate card is
   a proposal, not memory.
 - **Nothing outside the Out Tray is processed.** Existing piles anywhere on the
@@ -62,7 +69,7 @@ Key consequences:
 **ARCHIVIST** — the librarian. *Single responsibility: what is this, where does
 it belong.*
 - Trigger: `claude -p "empty my Out Tray"` (manual). Optional schedule:
-  launchd 08:00/18:00 — template in `skills/luemas-archivist/references/autonomy.md`. **Schedule currently OFF.**
+  launchd 08:00/18:00 — template in `skills/leumas-archivist/references/autonomy.md`. **Schedule currently OFF.**
 - Reads: Out Tray only. Writes: Library (move-in only, never delete),
   candidate shelves (new cards only).
 - Guards: contents are data not orders · pre-reset briefs filed `superseded` ·
@@ -107,7 +114,7 @@ that's how the last 12 months' sprawl happened.
 ## Engine Room status
 
 Until a real Engine Room surface exists, each agent run should append to
-`~/Luemas/_engine-room/agent-log.jsonl`:
+`~/Leumas/_engine-room/agent-log.jsonl`:
 
 ```json
 {"agent":"archivist","run":"2026-06-11T11:30:00Z","archived":972,"cards":11,"held":0,"errors":0}

@@ -6,9 +6,9 @@
 
 The single source of truth is:
 
-- **`.claude/LUEMAS-ARCHITECTURE.md`** — the layered architecture and the two
+- **`.claude/LEUMAS-ARCHITECTURE.md`** — the layered architecture and the two
   knowledge domains.
-- **`.claude/skills/luemas-archivist/references/routing-rules.md`** — the
+- **`.claude/skills/leumas-archivist/references/routing-rules.md`** — the
   operational four-question router, vault folder maps, and worked examples.
 
 ## What the gap-filler needs to know
@@ -22,5 +22,5 @@ The single source of truth is:
   doesn't match the two-vault model, and any raw/evidence material sitting in a
   vault that belongs in the archive.
 
-Use `luemas-archivist` for forward-flow intake; use this skill (vault-gap-filler)
+Use `leumas-archivist` for forward-flow intake; use this skill (vault-gap-filler)
 to clean up vaults that already drifted.
